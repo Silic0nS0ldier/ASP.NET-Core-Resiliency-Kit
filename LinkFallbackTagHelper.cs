@@ -14,6 +14,7 @@ https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro
 
 namespace Fallback.AspNetCore
 {
+    // We can probably resolve this to just attribute detection. JS can check the type client-side.
     [HtmlTargetElement("link", Attributes = FallbackHrefAttributeName)]
     public class LinkFallbackTagHelper : ITagHelper
     {
