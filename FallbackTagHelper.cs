@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Html;
@@ -16,12 +19,15 @@ namespace Fallback.AspNetCore
 {
     // We can probably resolve this to just attribute detection. JS can check the type client-side.
     [HtmlTargetElement("link", Attributes = FallbackHrefAttributeName)]
-    public class LinkFallbackTagHelper : ITagHelper
+    [HtmlTargetElement("script", Attributes = FallbackHrefAttributeName)]
+    public class FallbackTagHelper : ITagHelper
     {
         private const string FallbackHrefAttributeName = "fallback-href";
 
         [HtmlAttributeName(FallbackHrefAttributeName)]
         public string FallbackHref { get; set; }
+
+        public string PhoneHomeUrl;
 
         private bool firstInvocation = false;
 
@@ -37,51 +43,17 @@ namespace Fallback.AspNetCore
             }
         }
 
-        public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             if (firstInvocation) {
-/*
-// Recycles tag with fallback used upon download failure.
-function fallback(sender, type, url, phoneHomeUrl, callback) {
-    // Ping home about error if requested.
-    if (phoneHome) {
-        var req = new XMLHttpRequest();
-        req.open("POST", phoneHomeUrl, true);
-        req.send(JSON.stringify({
-            message: ""
-        })
-    }
-    // Replace initial url
-    if (type == "css") sender.href = url;
-    else if (type == "js") sender.src = url;
-    else throw "Type unsupported";
-
-    // Prevent loop, and log errors if requested.
-    //alt onerror
-    //
-
-    // Execute callback, if defined.
-
-    // Re-plug.
-    if (sender.replaceWith) sender.replaceWith(sender);
-    else sender.parentNode.replaceChild(sender, sender);
-}
-
-function fallbackFailure(sender, phoneHome, callback) {
-
-}
-*/
-                output.PreElement.AppendHtml(new Microsoft.AspNetCore.Html.HtmlString(
-@"<script type=""application/javascript"">
-function fallback(sender, type) {
-    switch (type) {
-        case ""css"":
-        case ""js"":
-    }
-}
-</script>
-"));
+                Stream resourceStream = Assembly.GetEntryAssembly().GetManifestResourceStream("EmbeddedResource.Data.fallback.partial.html");
+                using (StreamReader reader = new StreamReader(resourceStream, Encoding.UTF8))
+                {
+                    output.PreElement.AppendHtml(new HtmlString(await reader.ReadToEndAsync()));
+                }
             }
+            // add onerror (contains fallback urls, etc)
+            output.Attributes.Add("onerror", $"fallback({FallbackHref}, );");
             throw new NotImplementedException();
         }
     }
