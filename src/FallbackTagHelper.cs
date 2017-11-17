@@ -18,16 +18,16 @@ https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro
 namespace Fallback.AspNetCore
 {
     // We can probably resolve this to just attribute detection. JS can check the type client-side.
-    [HtmlTargetElement("link", Attributes = FallbackHrefAttributeName)]
-    [HtmlTargetElement("script", Attributes = FallbackHrefAttributeName)]
+    [HtmlTargetElement("link", Attributes = FallbackUrlAttributeName)]
+    [HtmlTargetElement("script", Attributes = FallbackUrlAttributeName)]
     public class FallbackTagHelper : ITagHelper
     {
-        private const string FallbackHrefAttributeName = "fallback-href";
+        private const string FallbackUrlAttributeName = "fallback-href";
 
-        [HtmlAttributeName(FallbackHrefAttributeName)]
-        public string FallbackHref { get; set; }
+        [HtmlAttributeName(FallbackUrlAttributeName)]
+        public string FallbackUrl { get; set; }
 
-        public string PhoneHomeUrl;
+        public string ReportUrl;
 
         private bool firstInvocation = false;
 
@@ -37,15 +37,17 @@ namespace Fallback.AspNetCore
         public void Init(TagHelperContext context)
         {
             // Check for previous invocations. If there is none, this invocation must provide the fallback method.
-            if (!context.Items.ContainsKey("FallbackFirstFound")) {
-                context.Items.Add("FallbackFirstFound", true);
+            if (!context.Items.ContainsKey("FirstFallbackFound"))
+            {
+                context.Items.Add("FirstFallbackFound", true);
                 firstInvocation = true;
             }
         }
 
         public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (firstInvocation) {
+            if (firstInvocation)
+            {
                 Stream resourceStream = Assembly.GetEntryAssembly().GetManifestResourceStream("EmbeddedResource.Data.fallback.partial.html");
                 using (StreamReader reader = new StreamReader(resourceStream, Encoding.UTF8))
                 {
@@ -53,7 +55,7 @@ namespace Fallback.AspNetCore
                 }
             }
             // add onerror (contains fallback urls, etc)
-            output.Attributes.Add("onerror", $"fallback({FallbackHref}, );");
+            output.Attributes.Add("onerror", $@"fallback(""{FallbackUrl}"", );");
             throw new NotImplementedException();
         }
     }
