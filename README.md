@@ -53,6 +53,11 @@ How
 
 The `link` and `script` tags both have widespread support for the `error` event, which is triggered for any error related to load failure. My solution takes advantage of this to reliably kick-in as needed, with minimal overhead.
 
+Building Solution
+-----------------
+
+Node JS is required for building this library, and it must be accessible from PATH. Its job is to inject the necessary JS script in minified form directly into the code, and remove it after compilation is completed. Its an extra step, but one that ensures maximum performance.
+
 To Do
 -----
 

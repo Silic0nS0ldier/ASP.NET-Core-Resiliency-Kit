@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "replace-in-file": "^3.0.0",
+    "uglify-js": "^3.1.10"
+  }
+}

@@ -48,11 +48,7 @@ namespace Fallback.AspNetCore
         {
             if (firstInvocation)
             {
-                Stream resourceStream = Assembly.GetEntryAssembly().GetManifestResourceStream("EmbeddedResource.Data.fallback.partial.html");
-                using (StreamReader reader = new StreamReader(resourceStream, Encoding.UTF8))
-                {
-                    output.PreElement.AppendHtml(new HtmlString(await reader.ReadToEndAsync()));
-                }
+                output.PreElement.AppendHtml(new HtmlString("<script type=\"application/javascript\">~~FALLBACK_CODE~~</script>"));
             }
             // add onerror (contains fallback urls, etc)
             output.Attributes.Add("onerror", $@"fallback(""{FallbackUrl}"", );");
