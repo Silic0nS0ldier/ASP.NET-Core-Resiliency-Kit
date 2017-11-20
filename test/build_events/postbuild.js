@@ -9,7 +9,7 @@ FS.unlinkSync("./fallback.js.cache");
 
 // Replace key phrase with minified script.
 ReplaceInFile.sync({
-    files: "../FallbackTagHelper.cs",
+    files: "../FallbackTagHelperTest.cs",
     from: fallbackScript,
     to: "~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~"
 });

@@ -10,7 +10,9 @@ namespace Fallback.AspNetCore.Test
 {
     public class FallbackTagHelperTest
     {
-        // data generator
+        // Fallback Script (script is inserted during build)
+        private string FallbackScript = "<script type=\"application/javascript\">~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~</script>";
+
         /// <summary>
         /// Generates a clean environment for testing the tag helper.
         /// </summary>
@@ -45,7 +47,7 @@ namespace Fallback.AspNetCore.Test
         }
 
         // Single first
-        [Fact]
+        [Theory]
         [InlineData("link", "http://www.example.com/1.css~http://www.example.com/2.css")]
         [InlineData("script", "http://www.example.com/3.js", "http://www.example.com/report/resourcefailure/")]
         public void FallbackUsedOneTest(string tagName, string fallbackUrls, string reportUrl = "")
@@ -53,11 +55,35 @@ namespace Fallback.AspNetCore.Test
             // Create environment
             var env = EnvironmentGenerator(tagName, fallbackUrls, reportUrl);
 
+            // Construct helper
+            var fth = new FallbackTagHelper();
 
+            // Apply attributes to emulate what ASP.NET Core does for us.
+            fth.FallbackUrls = fallbackUrls;
+            fth.FallbackReportUrl = reportUrl;
+
+            // Initalise
+            fth.Init(env.context);
+
+            // Execute
+            fth.Process(env.context, env.output);
+
+            // Inspect output
+
+            // Tag name should be equal to input
+            Assert.Equal(tagName, env.output.TagName);
+            // Attribute onerror should be equal.
+            TagHelperAttribute onerrorResult;
+            env.output.Attributes.TryGetAttribute("onerror", out onerrorResult);
+            Assert.Equal($@"fallback(this, ""{fallbackUrls}"", ""{reportUrl}"");", onerrorResult.Value);
+            // Attribute fallback-urls should not exist.
+            Assert.False(env.output.Attributes.ContainsName("fallback-urls"));
+            // Attribute fallback-report-url should not exist.
+            Assert.False(env.output.Attributes.ContainsName("fallback-report-url"));
         }
 
         // Twice second
-        [Fact]
+        //[Theory]
         public void FallbackUsedTwiceTest()
         {
 

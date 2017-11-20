@@ -61,7 +61,5 @@ Node JS is required for building this library, and it must be accessible from PA
 To Do
 -----
 
-- Core functionality
-- Phoning home on failure (log to url if specified)
-- Tap a friend on failure (execute callback if specified) - delayed, might not be implemented as fallbacks get triggered extremely early.
 - Unit testing
+- Execute callback on failure, if supplied. - Implementation subject to user interest.

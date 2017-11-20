@@ -1,7 +1,7 @@
 # Artifacts
 /obj/
 /bin/
-/cache/
+fallback.js.cache
 
 # Dependency caches
 /build_events/node_modules/

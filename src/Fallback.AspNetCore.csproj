@@ -25,7 +25,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="Build">
-  <Message Text="Starting post-build clean up..." Importance="High" />
+    <Message Text="Starting post-build clean up..." Importance="High" />
     <Exec Command="cd build_events&#xD;&#xA;node postbuild.js" />
     <Message Text="Post-build clean up complete." Importance="High" />
   </Target>

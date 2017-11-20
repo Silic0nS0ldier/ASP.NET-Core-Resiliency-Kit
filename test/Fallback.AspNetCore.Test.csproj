@@ -2,18 +2,35 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
+    <RuntimeFrameworkVersion>2.0.3</RuntimeFrameworkVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\src\Fallback.AspNetCore.csproj" />
   </ItemGroup>
+
+  <!-- Needed for build scripts to work. Warnings say that they are ignored, but they do have an affect. -->
+  <!--<Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />-->
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+  <Target Name="BeforeBuild" BeforeTargets="Build">
+    <Message Text="Starting pre-build work..." Importance="High" />
+    <Exec Command="cd build_events&#xD;&#xA;npm i" />
+    <Exec Command="cd build_events&#xD;&#xA;node prebuild.js" />
+    <Message Text="Pre-build work complete." Importance="High" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="Build">
+  <Message Text="Starting post-build clean up..." Importance="High" />
+    <Exec Command="cd build_events&#xD;&#xA;node postbuild.js" />
+    <Message Text="Post-build clean up complete." Importance="High" />
+  </Target>
 
 </Project>

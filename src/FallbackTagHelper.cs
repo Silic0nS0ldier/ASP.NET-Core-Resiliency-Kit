@@ -22,11 +22,11 @@ namespace Fallback.AspNetCore
     /// </summary>
     [HtmlTargetElement("link", Attributes = "fallback-urls")]
     [HtmlTargetElement("script", Attributes = "fallback-urls")]
-    public class FallbackTagHelper : ITagHelper
+    public class FallbackTagHelper : TagHelper
     {
         /// <summary>
         /// A ~ delimited string of urls to be used if the current resource fails to load.
-        /// Macthes with the fallback-urls attribute in Razor pages.
+        /// Matches with the fallback-urls attribute in Razor pages.
         /// </summary>
         public string FallbackUrls { get; set; }
         
@@ -40,15 +40,12 @@ namespace Fallback.AspNetCore
         /// Used to track if this is the first time the tag has been used on a page. Allows the required script to be placed once per page.
         /// </summary>
         private bool firstInvocation = false;
-
-        // No time dependencies, and so can be run right off the bat.
-        public int Order => 0;
         
         /// <summary>
         /// Initalises tag helper.
         /// </summary>
         /// <param name="context"></param>
-        public void Init(TagHelperContext context)
+        public override void Init(TagHelperContext context)
         {
             // Check for previous invocations. If there is none, this invocation must provide the fallback method.
             if (!context.Items.ContainsKey("FirstFallbackFound"))
@@ -63,8 +60,7 @@ namespace Fallback.AspNetCore
         /// </summary>
         /// <param name="context"></param>
         /// <param name="output"></param>
-        /// <returns></returns>
-        public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             // Inject required script if this is the first invocation.
             if (firstInvocation)
