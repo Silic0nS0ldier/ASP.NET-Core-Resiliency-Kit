@@ -15,6 +15,6 @@ FS.writeFileSync("./fallback.min.js", fallbackScript);
 // Replace key phrase with minified script.
 ReplaceInFile.sync({
     files: "../FallbackTagHelper.cs",
-    from: "~~FALLBACK_CODE~~",
+    from: "~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~",
     to: fallbackScript
 });

@@ -14,5 +14,5 @@ FS.unlinkSync("./fallback.min.js");
 ReplaceInFile.sync({
     files: "../FallbackTagHelper.cs",
     from: fallbackScript,
-    to: "~~FALLBACK_CODE~~"
+    to: "~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~"
 });

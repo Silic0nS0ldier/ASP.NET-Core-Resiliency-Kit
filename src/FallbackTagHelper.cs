@@ -17,23 +17,37 @@ https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro
 
 namespace Fallback.AspNetCore
 {
-    // We can probably resolve this to just attribute detection. JS can check the type client-side.
-    [HtmlTargetElement("link", Attributes = FallbackUrlAttributeName)]
-    [HtmlTargetElement("script", Attributes = FallbackUrlAttributeName)]
+    /// <summary>
+    /// A tag helper that provides fallback functionality for resources that fail to load. Supports link and script tags.
+    /// </summary>
+    [HtmlTargetElement("link", Attributes = "fallback-urls")]
+    [HtmlTargetElement("script", Attributes = "fallback-urls")]
     public class FallbackTagHelper : ITagHelper
     {
-        private const string FallbackUrlAttributeName = "fallback-href";
+        /// <summary>
+        /// A ~ delimited string of urls to be used if the current resource fails to load.
+        /// Macthes with the fallback-urls attribute in Razor pages.
+        /// </summary>
+        public string FallbackUrls { get; set; }
+        
+        // fallback-report-url
+        /// <summary>
+        /// A url to be used if a fallback supported resource fails to load. Optional.
+        /// </summary>
+        public string FallbackReportUrl { get; set; }
 
-        [HtmlAttributeName(FallbackUrlAttributeName)]
-        public string FallbackUrl { get; set; }
-
-        public string ReportUrl;
-
+        /// <summary>
+        /// Used to track if this is the first time the tag has been used on a page. Allows the required script to be placed once per page.
+        /// </summary>
         private bool firstInvocation = false;
 
         // No time dependencies, and so can be run right off the bat.
         public int Order => 0;
-
+        
+        /// <summary>
+        /// Initalises tag helper.
+        /// </summary>
+        /// <param name="context"></param>
         public void Init(TagHelperContext context)
         {
             // Check for previous invocations. If there is none, this invocation must provide the fallback method.
@@ -43,16 +57,28 @@ namespace Fallback.AspNetCore
                 firstInvocation = true;
             }
         }
-
+        
+        /// <summary>
+        /// Executes tag helper.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            // Inject required script if this is the first invocation.
             if (firstInvocation)
             {
-                output.PreElement.AppendHtml(new HtmlString("<script type=\"application/javascript\">~~FALLBACK_CODE~~</script>"));
+                // TODO: Jordan Mele - The injected code includes a polyfill not required by all modern browsers. Is there a way we can detect this, and further minimise the payload? Diminishing returns?
+                output.PreElement.AppendHtml(new HtmlString("<script type=\"application/javascript\">~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~</script>"));
             }
-            // add onerror (contains fallback urls, etc)
-            output.Attributes.Add("onerror", $@"fallback(""{FallbackUrl}"", );");
-            throw new NotImplementedException();
+            
+            // Add onerror event to attribute list.
+            output.Attributes.Add("onerror", $@"fallback(this, ""{FallbackUrls}"", ""{FallbackReportUrl}"");");
+
+            // Remove tag helper attributes if they exist.
+            output.Attributes.RemoveAll("fallback-urls");
+            output.Attributes.RemoveAll("fallback-report-url");
         }
     }
 }

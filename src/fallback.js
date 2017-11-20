@@ -23,7 +23,7 @@ if (!CharacterData.prototype.replaceWith) CharacterData.prototype.replaceWith = 
 if (!DocumentType.prototype.replaceWith) DocumentType.prototype.replaceWith = ReplaceWith;
 
 // Recycles tag with fallback used upon download failure.
-function fallback(sender, type, urls, reportUrl) {
+function fallback(sender, urls, reportUrl) {
     "use strict";
 
     // Extract first url from urls
@@ -46,8 +46,8 @@ function fallback(sender, type, urls, reportUrl) {
     }
 
     // Replace initial url
-    if (type == "css") sender.href = url;
-    else if (type == "js") sender.src = url;
+    if (sender.tagName == "LINK") sender.href = url;
+    else if (sender.tagName == "SCRIPT") sender.src = url;
     else throw "Type unsupported";
 
     // Update onerror trigger, setting to fallbackFailure if this is the last url.
