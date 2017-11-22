@@ -7,4 +7,5 @@ build_script:
 test_script:
 - ps: >-
     cd ./test/
+
     dotnet xunit
