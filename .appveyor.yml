@@ -5,7 +5,5 @@ build_script:
     cd ./src/
     dotnet build
 test_script:
-- ps: >-
-    cd ./test/
-
-    dotnet xunit
+- ps: cd ./test/
+- ps: dotnet xunit
