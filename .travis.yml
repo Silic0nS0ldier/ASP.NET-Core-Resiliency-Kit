@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: 2.0.3
+dist: trusty
+script:
+ - cd ./src/
+ - dotnet build
+ - cd ../test/
+ - dotnet xunit
