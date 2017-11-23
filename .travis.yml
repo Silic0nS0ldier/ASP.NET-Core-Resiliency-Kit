@@ -1,6 +1,7 @@
 language: csharp
 mono: none
 dotnet: 2.0.0
+node_js: 9
 dist: trusty
 script:
  - cd ./src/
