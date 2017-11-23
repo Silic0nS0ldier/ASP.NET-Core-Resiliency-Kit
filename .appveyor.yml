@@ -5,6 +5,8 @@ install:
   - ps: node --version
   - ps: npm --version
 build_script:
+  - ps: dotnet restore ./src/Fallback.AspNetCore.csproj
   - ps: dotnet build ./src/Fallback.AspNetCore.csproj
 test_script:
+  - ps: dotnet restore ./test/Fallback.AspNetCore.Test.csproj
   - ps: dotnet xunit ./test/Fallback.AspNetCore.Test.csproj
