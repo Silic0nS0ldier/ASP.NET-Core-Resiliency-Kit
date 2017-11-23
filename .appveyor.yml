@@ -3,7 +3,8 @@ image: Visual Studio 2017
 cache:
   # Node Modules
   - '%APPDATA%\npm-cache'
-  - '**\*\node_modules'
+  - .\src\build_events\node_modules
+  - .\test\build_events\node_modules
   # Nuget
   - '%USERPROFILE%\.nuget\packages'
 install:
