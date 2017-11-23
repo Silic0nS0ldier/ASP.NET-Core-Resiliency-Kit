@@ -9,6 +9,6 @@ build_script:
   - ps: dotnet restore
   - ps: dotnet build
 test_script:
-  - ps: cd ./test/
+  - ps: cd ../test/
   - ps: dotnet restore
   - ps: dotnet xunit
