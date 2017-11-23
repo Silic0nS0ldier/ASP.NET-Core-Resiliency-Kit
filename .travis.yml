@@ -1,9 +1,12 @@
 language: csharp
 mono: none
 dotnet: 2.0.0
-node_js: 9
 dist: trusty
+before_install:
+ - sudo apt-get install nodejs=9
 script:
+ - node --version
+ - npm --version
  - cd ./src/
  - dotnet restore
  - dotnet build
