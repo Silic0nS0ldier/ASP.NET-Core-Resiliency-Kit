@@ -4,7 +4,6 @@ cache:
   # Node Modules
   - '%APPDATA%\npm-cache'
   - .\src\build_events\node_modules
-  - .\test\build_events\node_modules
   # Nuget
   - '%USERPROFILE%\.nuget\packages'
 install:

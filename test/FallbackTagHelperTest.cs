@@ -10,9 +10,6 @@ namespace Fallback.AspNetCore.Test
 {
     public class FallbackTagHelperTest
     {
-        // Fallback Script (script is inserted during build)
-        private string FallbackScript = "<script type=\"application/javascript\">~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~</script>";
-
         /// <summary>
         /// Generates a clean environment for testing the tag helper.
         /// </summary>
@@ -71,7 +68,7 @@ namespace Fallback.AspNetCore.Test
             // Inspect output
 
             // Script should be embedded above tag
-            Assert.Equal(this.FallbackScript, env.output.PreElement.GetContent());
+            Assert.Equal(FallbackTagHelper.FallbackScript, env.output.PreElement.GetContent());
             // Tag name should be equal to input
             Assert.Equal(tagName, env.output.TagName);
             // Attribute onerror should be equal.
@@ -131,7 +128,7 @@ namespace Fallback.AspNetCore.Test
             // Inspect output of tag 1
 
             // Script should be embedded above tag
-            Assert.Equal(this.FallbackScript, env1.output.PreElement.GetContent());
+            Assert.Equal(FallbackTagHelper.FallbackScript, env1.output.PreElement.GetContent());
             // Tag name should be equal to input
             Assert.Equal(tagName, env1.output.TagName);
             // Attribute onerror should be equal.
@@ -145,7 +142,7 @@ namespace Fallback.AspNetCore.Test
             // Inspect output of tag 2
 
             // Script should not be embedded above tag
-            Assert.NotEqual(this.FallbackScript, env2.output.PreElement.GetContent());
+            Assert.NotEqual(FallbackTagHelper.FallbackScript, env2.output.PreElement.GetContent());
             // Tag name should be equal to input
             Assert.Equal(tagName, env2.output.TagName);
             // Attribute onerror should be equal.

@@ -24,6 +24,8 @@ namespace Fallback.AspNetCore
     [HtmlTargetElement("script", Attributes = "fallback-urls")]
     public class FallbackTagHelper : TagHelper
     {
+        public static string FallbackScript = "<script type=\"application/javascript\">~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~</script>";
+
         /// <summary>
         /// A ~ delimited string of urls to be used if the current resource fails to load.
         /// Matches with the fallback-urls attribute in Razor pages.
@@ -66,7 +68,7 @@ namespace Fallback.AspNetCore
             if (firstInvocation)
             {
                 // TODO: Jordan Mele - The injected code includes a polyfill not required by all modern browsers. Is there a way we can detect this, and further minimise the payload? Diminishing returns?
-                output.PreElement.AppendHtml(new HtmlString("<script type=\"application/javascript\">~~FALLBACK_SCRIPT_INJECTED_DURING_BUILD~~</script>"));
+                output.PreElement.AppendHtml(new HtmlString(FallbackTagHelper.FallbackScript));
             }
             
             // Add onerror event to attribute list.

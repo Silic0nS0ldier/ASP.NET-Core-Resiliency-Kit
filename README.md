@@ -3,12 +3,10 @@ Fallbacks for ASP.NET Core
 
 A simple, clean CSS and JS fallback library for ASP.NET Core.
 
-[![AppVeyor Build Status](
-https://img.shields.io/appveyor/ci/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?logo=appveyor&label=Windows%20Build&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core)
-[![AppVeyor Tests Status](
-https://img.shields.io/appveyor/tests/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?logo=appveyor&label=Windows%20Tests&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core)
-[![Travis Build Status](
-https://img.shields.io/travis/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core/dev.svg?label=Linux%20Build&style=flat-square)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core)
+| Branch | Builds | Tests |
+| ------ | ------ | ----- |
+| master | [![AppVeyor Build Status](https://img.shields.io/appveyor/ci/Silic0nS0ldier/fallbacks-for-asp-net-core/master.svg?label=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core) [![Travis Build Status](https://img.shields.io/travis/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core/master.svg?label=Travis&style=flat-square)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core) | [![AppVeyor Tests Status](https://img.shields.io/appveyor/tests/Silic0nS0ldier/fallbacks-for-asp-net-core/master.svg?label=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core) |
+| dev    | [![AppVeyor Build Status](https://img.shields.io/appveyor/ci/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?label=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core) [![Travis Build Status](https://img.shields.io/travis/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core/dev.svg?label=Travis&style=flat-square)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core) | [![AppVeyor Tests Status](https://img.shields.io/appveyor/tests/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?label=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core) |
 
 Features
 --------
