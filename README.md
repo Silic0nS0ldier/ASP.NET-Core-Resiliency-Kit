@@ -3,7 +3,12 @@ Fallbacks for ASP.NET Core
 
 A simple, clean CSS and JS fallback library for ASP.NET Core.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xtk4dt06ne5d98f8/branch/dev?svg=true)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core/branch/dev) [![Build Status](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core.svg?branch=dev)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core)
+[![AppVeyor Build Status](
+https://img.shields.io/appveyor/ci/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?logo=appveyor&label=Windows%20Build&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core)
+[![AppVeyor Tests Status](
+https://img.shields.io/appveyor/tests/Silic0nS0ldier/fallbacks-for-asp-net-core/dev.svg?logo=appveyor&label=Windows%20Tests&style=flat-square)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core)
+[![Travis Build Status](
+https://img.shields.io/travis/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core/dev.svg?label=Linux%20Build&style=flat-square)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core)
 
 Features
 --------
@@ -16,20 +21,20 @@ Quick Start
 
 Install the package
 
-```ps
+```PowerShell
 dotnet add package Fallback.AspNetCore
 ```
 
 Reference tag helper from `cshtml` page
 
-```cshtml
+```C#
 @using Fallback.AspNetCore;
 @addTagHelper Fallback.AspNetCore.FallbackTagHelper
 ```
 
 Use it!
 
-```cshtml
+```C#
 <script src="www.example.com/cdn1/example.css" fallback-url="www.example.com/cdn2/example.css~./example.css" async></script>
 ```
 
@@ -61,5 +66,4 @@ Node JS is required for building this library, and it must be accessible from PA
 To Do
 -----
 
-- Unit testing
 - Execute callback on failure, if supplied. - Implementation subject to user interest.
