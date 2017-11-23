@@ -7,6 +7,7 @@ before_install:
  - sudo apt-get install --only-upgrade nodejs
 script:
  - node --version
+ - nodejs --version
  - npm --version
  - cd ./src/
  - dotnet restore
