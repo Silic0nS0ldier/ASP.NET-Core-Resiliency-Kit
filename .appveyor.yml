@@ -1,5 +1,11 @@
 version: 1.0.0.{build}
 image: Visual Studio 2017
+cache:
+  # Node Modules
+  - '%APPDATA%\npm-cache'
+  - '**\node_modules'
+  # Nuget
+  - '%USERPROFILE%\.nuget\packages'
 install:
   - ps: Install-Product node 9
   - ps: node --version
