@@ -4,10 +4,9 @@ dotnet: 2.0.0
 dist: trusty
 before_install:
  - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
- - sudo apt-get install --only-upgrade nodejs
+ - sudo apt-get install --only-upgrade node
 script:
  - node --version
- - nodejs --version
  - npm --version
  - cd ./src/
  - dotnet restore
