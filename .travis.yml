@@ -2,15 +2,14 @@ language: csharp
 mono: none
 dotnet: 2.0.0
 dist: trusty
-before_install:
- - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
- - sudo apt-get install --only-upgrade node
+install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 9
 script:
- - node --version
- - npm --version
- - cd ./src/
- - dotnet restore
- - dotnet build
- - cd ../test/
- - dotnet restore
- - dotnet xunit
+  - node --version
+  - npm --version
+  - cd ./src/
+  - dotnet restore
+  - dotnet build
+  - cd ../test/
+  - dotnet restore
+  - dotnet xunit
