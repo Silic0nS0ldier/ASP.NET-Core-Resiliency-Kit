@@ -3,7 +3,7 @@ Fallbacks for ASP.NET Core
 
 A simple, clean CSS and JS fallback library for ASP.NET Core.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xtk4dt06ne5d98f8/branch/dev?svg=true)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core/branch/dev)
+[![Build status](https://ci.appveyor.com/api/projects/status/xtk4dt06ne5d98f8/branch/dev?svg=true)](https://ci.appveyor.com/project/Silic0nS0ldier/fallbacks-for-asp-net-core/branch/dev) [![Build Status](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core.svg?branch=dev)](https://travis-ci.org/Silic0nS0ldier/Fallbacks-for-ASP.NET-Core)
 
 Features
 --------
