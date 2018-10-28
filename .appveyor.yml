@@ -11,10 +11,6 @@ install:
   - ps: node --version
   - ps: npm --version
 build_script:
-  - ps: cd ./src/
+  - ps: cd ./AspNetCoreResiliencyKit.TagHelpers/
   - ps: dotnet restore
   - ps: dotnet build
-test_script:
-  - ps: cd ../test/
-  - ps: dotnet restore
-  - ps: dotnet xunit

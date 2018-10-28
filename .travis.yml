@@ -7,9 +7,6 @@ install:
 script:
   - node --version
   - npm --version
-  - cd ./src/
+  - cd ./AspNetCoreResiliencyKit.TagHelpers/
   - dotnet restore
   - dotnet build
-  - cd ../test/
-  - dotnet restore
-  - dotnet xunit
