@@ -8,5 +8,6 @@ script:
   - node --version
   - npm --version
   - cd ./AspNetCoreResiliencyKit.TagHelpers/
+  - npm i
   - dotnet restore
   - dotnet build
