@@ -12,5 +12,6 @@ install:
   - ps: npm --version
 build_script:
   - ps: cd ./AspNetCoreResiliencyKit.TagHelpers/
+  - ps: npm i
   - ps: dotnet restore
   - ps: dotnet build
