@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "devDependencies": {
+    "esm": "3.0.84",
+    "replace-in-file": "3.4.2",
+    "uglify-js": "3.4.9"
+  }
+}

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Http"
+                          Version="2.1.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures"
+                          Version="2.1.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor"
+                          Version="2.1.2" />
+    </ItemGroup>
+
+    <!-- Sure that the following can be optimised, but its fine for now. -->
+    
+    <Target Name="MinifyFallback"
+            Inputs="$(ProjectDir)FallbackSource.js"
+            Outputs="$(ProjectDir)$(IntermediateOutputPath)FallbackSource.js.cache">
+        <Exec Command="node -r esm BuildTasks.js minify &quot;$(ProjectDir)FallbackSource.js&quot; &quot;$(ProjectDir)$(IntermediateOutputPath)FallbackSource.js.cache&quot;" />
+    </Target>
+
+    <Target Name="InsertFallbackInSource"
+            BeforeTargets="CoreCompile"
+            DependsOnTargets="MinifyFallback">
+        <Exec Command="node -r esm BuildTasks.js insert &quot;$(ProjectDir)ResourceResilienceTagHelper.cs&quot; &quot;$(ProjectDir)$(IntermediateOutputPath)FallbackSource.js.cache&quot;" />
+    </Target>
+
+    <Target Name="RemoveFallbackInSource"
+            AfterTargets="CoreCompile">
+        <Exec Command="node -r esm BuildTasks.js remove &quot;$(ProjectDir)ResourceResilienceTagHelper.cs&quot; &quot;$(ProjectDir)$(IntermediateOutputPath)FallbackSource.js.cache&quot;" />
+    </Target>
+
+</Project>

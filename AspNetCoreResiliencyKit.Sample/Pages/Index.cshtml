@@ -1,0 +1,18 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AspNetCoreResiliencyKit.Sample</title>
+
+    <script src="~/css/example.css" src-alternatives="@{new List<string>() { "https://cnd1.example.com/example.css", "https://cnd2.example.com/example.css" };}" async></script>
+</head>
+<body>
+    Take a peak at the source to see the fallbacks in action.
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "AspNetCoreResiliencyKit.TagHelpers": {
+      "commandName": "Project"
+    }
+  }
+}

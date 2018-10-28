@@ -1,2 +1,9 @@
 # VS 2017 Cache
 /.vs/
+
+# Bin and obj
+*/obj/
+*/bin/
+
+# Node modules
+*/node_modules/
